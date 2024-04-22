@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Objects;
 
 @SpringBootApplication // Below mention annotations were used in spring now //@SpringBootApplication  is used instead of these three
@@ -25,44 +26,65 @@ public class Main {
 //    public String greet(){
 //        return "Hello";
 //    }
-    public GreetResponse greet(){
-        return new GreetResponse("Hello"); // it returns JSON response
+    public GreetResponse greet() { // it returns JSON response
+         GreetResponse response =  new GreetResponse(
+                                        "Hello",
+                                        List.of("Java","Golang","JavaScript"),
+                                        new Person("Alex",28, 30_000)
+
+        );
+        return response;
     }
-    // record GreetResponse(String greet){}
+
+    record Person(String name, int age, double savings){}
+
+    record GreetResponse(
+            String greet,
+            List<String> favProgrammingLanguages,
+            Person person
+            ) {}
+
     //'Record' is a keyword introduced in Java 14 that helps you create simple, immutable data carrier classes without boilerplate code.
     // Instantiated with the syntax, record className(dataType x, dataType y) {} It's a quick and efficient way to encapsulate a group of related data.
-    // Classes are mutable while records are immutable
+    // ** Classes are mutable while records are immutable
+    // Record creates following:
+    // 1) encapsulate variable
+    // 2) Constructor
+    // 3) getter
+    // 4) toString method
+    // 5) equals and hashcode method
 
     // We can write below code instead of record
-    class GreetResponse{
-        private final String greet;
-
-        GreetResponse(String greet){
-            this.greet = greet;
-        }
-
-        public String getGreet(){
-            return greet;
-        }
-
-        @Override
-        public String toString() {
-            return "GreetResponse{" +
-                    "greet='" + greet + '\'' +
-                    '}';
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            GreetResponse that = (GreetResponse) o;
-            return Objects.equals(greet, that.greet);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hashCode(greet);
-        }
-    }
+    // ** The JSON response that we are getting is due to the external library called Jackson
+//    class GreetResponse{
+//        private final String greet;
+//
+//        GreetResponse(String greet){
+//            this.greet = greet;
+//        }
+//
+//        public String getGreet(){
+//            return greet;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return "GreetResponse{" +
+//                    "greet='" + greet + '\'' +
+//                    '}';
+//        }
+//
+//        @Override
+//        public boolean equals(Object o) {
+//            if (this == o) return true;
+//            if (o == null || getClass() != o.getClass()) return false;
+//            GreetResponse that = (GreetResponse) o;
+//            return Objects.equals(greet, that.greet);
+//        }
+//
+//        @Override
+//        public int hashCode() {
+//            return Objects.hashCode(greet);
+//        }
+//    }
 }
