@@ -22,6 +22,8 @@ public class Customer {
     public Customer() {
     }
 
+    // getters and setters
+
     public Integer getId() {
         return id;
     }
@@ -30,7 +32,7 @@ public class Customer {
         this.id = id;
     }
 
-    // getters and setters
+
     public String getName() {
         return name;
     }
@@ -81,7 +83,7 @@ public class Customer {
     }
 
     //toString method
-    // We use toString method to return our class variables as a string because otherwise it returns the memory location of variables
+    // We use toString method to return our class variables as a string otherwise it returns the memory location of variables
     @Override
     public String toString() {
         return "Customer{" +

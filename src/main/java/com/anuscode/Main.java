@@ -50,7 +50,7 @@ public class Main {
     // Record creates following:
     // 1) encapsulate variable
     // 2) Constructor
-    // 3) getter
+    // 3) getter and setter
     // 4) toString method
     // 5) equals and hashcode method
 
