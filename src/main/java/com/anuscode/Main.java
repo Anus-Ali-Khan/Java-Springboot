@@ -22,27 +22,28 @@ public class Main {
       SpringApplication.run(Main.class, args);
     }
 
-    @GetMapping("/greet")       // endpoints that clients can call
-//    public String greet(){
-//        return "Hello";
+
+//    @GetMapping("/greet")       // endpoints that clients can call
+////    public String greet(){
+////        return "Hello";
+////    }
+//    public GreetResponse greet() { // it returns JSON response
+//         GreetResponse response =  new GreetResponse(
+//                                        "Hello",
+//                                        List.of("Java","Golang","JavaScript"),
+//                                        new Person("Alex",28, 30_000)
+//
+//        );
+//        return response;
 //    }
-    public GreetResponse greet() { // it returns JSON response
-         GreetResponse response =  new GreetResponse(
-                                        "Hello",
-                                        List.of("Java","Golang","JavaScript"),
-                                        new Person("Alex",28, 30_000)
-
-        );
-        return response;
-    }
-
-    record Person(String name, int age, double savings){}
-
-    record GreetResponse(
-            String greet,
-            List<String> favProgrammingLanguages,
-            Person person
-            ) {}
+//
+//    record Person(String name, int age, double savings){}
+//
+//    record GreetResponse(
+//            String greet,
+//            List<String> favProgrammingLanguages,
+//            Person person
+//            ) {}
 
     //'Record' is a keyword introduced in Java 14 that helps you create simple, immutable data carrier classes without boilerplate code.
     // Instantiated with the syntax, record className(dataType x, dataType y) {} It's a quick and efficient way to encapsulate a group of related data.

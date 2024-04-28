@@ -1,11 +1,26 @@
 package com.anuscode;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
 // 1st Step: Creating Models
 
+ @Entity             // need to connect JPA
+ public class Customer {
 
-public class Customer {
+    //By using @Entity we are mapping customer class to our database and creating table called customer having four variables declared below
+    // and by doing @Id @SequenceGenerator and @GeneratedValue  used for sequence
+
+    @Id
+    @SequenceGenerator( // this is used for postgresql
+            name = "customer_id_sequence",
+            sequenceName = "customer_id_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "customer_id_sequence"
+    )
     private Integer id;
     private String name;
     private String email;
