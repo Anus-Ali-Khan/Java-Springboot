@@ -15,7 +15,8 @@ import java.util.Objects;
     @Id
     @SequenceGenerator( // this is used for postgresql
             name = "customer_id_sequence",
-            sequenceName = "customer_id_sequence"
+            sequenceName = "customer_id_sequence",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,

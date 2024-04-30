@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,9 +18,27 @@ import java.util.Objects;
 //@Configuration
 @RestController // indicates that this class has rest-endpoints and it also indicates that all the classes are controller and their methods will return JSON response
 // Spring-Web-MVC -- it serves as servlet(Process which handles HTTP requests)
+
+@RequestMapping("api/v1/customers")
 public class Main {
+
+
+    // For connecting to db
+    private final CustomerRepository customerRepository; // variable declaration
+
+    public Main(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
     public static void main(String[] args) {
       SpringApplication.run(Main.class, args);
+    }
+
+
+    // Get Api
+    @GetMapping
+    public List<Customer> getCustomers(){
+        return customerRepository.findAll();
     }
 
 
