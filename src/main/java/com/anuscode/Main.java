@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +20,6 @@ import java.util.Objects;
 @RequestMapping("api/v1/customers")
 public class Main {
 
-
     // For connecting to db
     private final CustomerRepository customerRepository; // variable declaration
 
@@ -35,10 +32,27 @@ public class Main {
     }
 
 
-    // Get Api
+    // Get Api (get list of customers)
     @GetMapping
     public List<Customer> getCustomers(){
         return customerRepository.findAll();
+    }
+
+    //Post Api (create new customer)
+    record NewCustomerRequest(
+            String name,
+            String email,
+            Integer age
+    ){}
+
+    @PostMapping
+    public void addCustomer(@RequestBody NewCustomerRequest request){ //@RequestBody will capture the client side request and then convert it into JSON
+        Customer customer = new Customer();
+        customer.setName(request.name());
+        customer.setEmail(request.email());
+        customer.setAge(request.age());
+        customerRepository.save(customer);
+
     }
 
 
