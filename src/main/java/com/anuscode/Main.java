@@ -1,14 +1,11 @@
 package com.anuscode;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @SpringBootApplication // Below mention annotations were used in spring now //@SpringBootApplication  is used instead of these three
 //@ComponentScan(basePackages =  "com.amigoscode") // It is used to search for specified package in our file
@@ -22,7 +19,6 @@ public class Main {
 
     // For connecting to db
     private final CustomerRepository customerRepository; // variable declaration
-
     public Main(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
@@ -52,6 +48,25 @@ public class Main {
         customer.setEmail(request.email());
         customer.setAge(request.age());
         customerRepository.save(customer);
+
+    }
+
+    //Delete Api
+    @DeleteMapping("{customerId}")
+    public void deleteCustomer(@PathVariable("customerId") Integer id){ //@PathVariable guides the customer id
+        customerRepository.deleteById(id);
+    }
+
+    //Update Api
+    @PutMapping("{customerId}")
+    public Optional<Customer> updateCustomer(@PathVariable("customerId") Integer id, @RequestBody NewCustomerRequest request){
+        Optional<Customer> prevCustomer = this.customerRepository.findById(id);
+        prevCustomer.setName(request.name());
+        prevCustomer.setAge(request.age());
+        customerRepository.save(prevCustomer);
+        return prevCustomer;
+
+
 
     }
 

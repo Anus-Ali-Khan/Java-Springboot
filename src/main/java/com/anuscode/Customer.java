@@ -27,6 +27,7 @@ import java.util.Objects;
     private String email;
     private Integer age;
 
+    //Constructor with args
     public Customer(Integer id, String name, String email, Integer age) {
         this.id = id;
         this.name = name;
@@ -34,7 +35,7 @@ import java.util.Objects;
         this.age = age;
     }
 
-    //Constructors
+    //no arg Constructors
     public Customer() {
     }
 
