@@ -59,13 +59,15 @@ public class Main {
 
     //Update Api
     @PutMapping("{customerId}")
-    public Optional<Customer> updateCustomer(@PathVariable("customerId") Integer id, @RequestBody NewCustomerRequest request){
+    public void updateCustomer(@PathVariable("customerId") Integer id, @RequestBody NewCustomerRequest newRequest){
         Optional<Customer> prevCustomer = this.customerRepository.findById(id);
-        prevCustomer.setName(request.name());
-        prevCustomer.setAge(request.age());
-        customerRepository.save(prevCustomer);
-        return prevCustomer;
 
+        if(prevCustomer.isPresent()){
+            Customer updatedCustomer = prevCustomer.get();
+            updatedCustomer.setName(newRequest.name());
+            updatedCustomer.setAge(newRequest.age());
+            customerRepository.save(updatedCustomer);
+        }
 
 
     }
